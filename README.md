@@ -59,8 +59,9 @@ pip install -r requirements.txt
 
 Start worker:
 python worker.py
------------------------------------------------------
 
+
+-----------------------------------------------------
 2 Database Schema Explanation
 
 The system uses a single table: tasks.
