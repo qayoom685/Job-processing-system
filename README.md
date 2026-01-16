@@ -30,8 +30,6 @@ cd job-processing-system
 
 1.3 Node.js API Setup
 
-cd api
-
 •	npm install
 
 
