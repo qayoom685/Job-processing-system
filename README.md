@@ -77,7 +77,7 @@ npm run dev
 Verify:
 http://localhost:3000/health
 
-1.5 Python Worker Setup
+1.4 Python Worker Setup
 
 •	cd worker
 
