@@ -14,7 +14,7 @@ app.get('/db-test', async (req, res) => {
 app.use('/', taskRoutes);
 
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.json({ status: 'Hello' });
 });
 
 
