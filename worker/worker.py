@@ -30,10 +30,10 @@ def main():
         cursor = conn.cursor(dictionary=True)
 
         try:
-            # 1️⃣ Start transaction
+            # 1 Start transaction
             conn.start_transaction()
 
-            # 2️⃣ Fetch & lock task
+            # 2 Fetch & lock task
             task = fetch_and_claim_task(cursor)
 
             if not task:
@@ -41,18 +41,18 @@ def main():
                 time.sleep(POLL_INTERVAL)
                 continue
 
-            # 3️⃣ Commit lock
+            # 3 Commit lock
             conn.commit()
 
             try:
-                # 4️⃣ Execute task
+                # 4 Execute task
                 result = execute_task(task['type'], task['input_text'])
 
-                # 5️⃣ Mark completed
+                # 5 Mark completed
                 complete_task(cursor, task['id'], result)
 
             except Exception as e:
-                # 6️⃣ Mark failed
+                # 6 Mark failed
                 fail_task(cursor, task['id'], e)
 
             conn.commit()
