@@ -1,9 +1,13 @@
 Job Processing System
 
 This project implements a simple asynchronous job processing system using:
+
 •	Node.js (Express) for the API
+
 •	Python for background workers
+
 •	MySQL for persistent storage
+
 The system allows clients to submit jobs, process them asynchronously, and retrieve results without blocking the API.
 
 ---------------------------------------------------
@@ -12,8 +16,11 @@ The system allows clients to submit jobs, process them asynchronously, and retri
 1.1 Prerequisites
 
 •	Node.js 
+
 •	Python 
+
 •	MySQL 
+
 •	Git
 
 1.2 Clone Repository
@@ -22,7 +29,9 @@ git clone <repository-url>
 cd job-processing-system
 
 1.3 Node.js API Setup
+
 cd api
+
 •	npm install
 
 Create .env file inside the api folder:
@@ -42,8 +51,11 @@ http://localhost:3000/health
 1.5 Python Worker Setup
 
 •	cd worker
+
 •	python -m venv venv
+
 •	source venv/Scripts/activate   # Windows
+
 •	pip install -r requirements.txt
 
 Start worker:
@@ -68,53 +80,82 @@ CREATE TABLE tasks (
 
 Key Columns
 •	id – Unique task identifier
+
 •	type – Task type (uppercase, reverse)
+
 •	input_text – Input provided by client
+
 •	status – Task lifecycle state
+
 •	result – Output of completed task
+
 •	error – Error message if failed
+
 •	locked_at – Timestamp when a worker claims the task
 
 ----------------------------------------------------------
 3 How Concurrency Is Handled
+
 •	Concurrency is handled entirely at the database level using MySQL row-level locking.
+
 •	Job Claiming Strategy
 
 Each worker performs the following steps inside a transaction:
+
 Selects one pending task using: SELECT ... FOR UPDATE
 
 •	This locks the row so no other worker can select it.
+
 •	Updates the task status to processing.
+
 •	Commits the transaction.
 
+
 Because of MySQL’s row-level locking:
+
 •	Only one worker can claim a task
+
 •	Multiple workers can run safely
+
 •	Tasks are processed exactly once
 
 ----------------------------------------------
 4 Known Limitations
 
 •	No automatic retry mechanism for failed tasks
+
 •	No scheduled cleanup for stuck tasks (can be added using locked_at)
+
 •	Polling-based workers (not event-driven)
+
 •	No authentication or authorization
+
 •	Designed for simplicity, not high-throughput production workloads
 
 --------------------------------------------------
 5 Design Notes
 
 •	Task execution is never performed inside the Node.js API
+
 •	API remains responsive at all times
+
 •	Raw SQL is used (no ORM)
+
 •	No message queues or Docker, as per constraints
 
 ---------------------------------------------------
 6 Assessment Compliance
+
 •	MySQL used
+
 •	No ORMs
+
 •	No message queues
+
 •	No Docker
+
 •	Asynchronous processing
+
 •	Concurrency-safe
+
 •	Crash-resistant design
