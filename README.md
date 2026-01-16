@@ -34,6 +34,37 @@ cd api
 
 •	npm install
 
+
+Dependencies
+
+Node.js Dependencies
+
+Installed via npm install:
+
+{
+  "express": "^4.x",
+  "mysql2": "^3.x",
+  "dotenv": "^16.x"
+}
+
+
+Explanation:
+
+express
+Used to build the HTTP API for task creation and status retrieval.
+
+mysql2
+MySQL client library used for executing raw SQL queries (no ORM).
+
+dotenv
+Loads environment variables from .env for database configuration.
+
+Development Dependency:
+
+{
+  "nodemon": "^3.x"
+}
+
 Create .env file inside the api folder:
 
 PORT=3000
@@ -57,6 +88,13 @@ http://localhost:3000/health
 •	source venv/Scripts/activate   # Windows
 
 •	pip install -r requirements.txt
+
+
+Python Dependencies
+
+Installed via pip install -r requirements.txt:
+
+mysql-connector-python
 
 Start worker:
 python worker.py
