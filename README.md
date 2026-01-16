@@ -13,7 +13,7 @@ MySQL for persistent storage
 The system allows clients to submit jobs, process them asynchronously, and retrieve results without blocking the API.
 
 ---------------------------------------------------
-1. Setup Instructions
+1 Setup Instructions
 
 1.1 Prerequisites
 
@@ -25,12 +25,10 @@ MySQL
 
 Git
 
-
 1.2 Clone Repository
 
 git clone <repository-url>
 cd job-processing-system
-
 
 1.3 Node.js API Setup
 
@@ -57,15 +55,14 @@ http://localhost:3000/health
 cd worker
 python -m venv venv
 source venv/Scripts/activate   # Windows
-
-
 pip install -r requirements.txt
 
 Start worker:
-
 python worker.py
 
-2. Database Schema Explanation
+
+-----------------------------------------------------
+2 Database Schema Explanation
 
 The system uses a single table: tasks.
 
@@ -98,7 +95,7 @@ error – Error message if failed
 locked_at – Timestamp when a worker claims the task
 
 ----------------------------------------------------------
-3. How Concurrency Is Handled
+3 How Concurrency Is Handled
 
 Concurrency is handled entirely at the database level using MySQL row-level locking.
 
@@ -125,7 +122,7 @@ Multiple workers can run safely
 Tasks are processed exactly once
 
 ----------------------------------------------
-4. Known Limitations
+4 Known Limitations
 
 No automatic retry mechanism for failed tasks
 
@@ -138,7 +135,7 @@ No authentication or authorization
 Designed for simplicity, not high-throughput production workloads
 
 --------------------------------------------------
-5. Design Notes
+5 Design Notes
 
 Task execution is never performed inside the Node.js API
 
@@ -149,7 +146,7 @@ Raw SQL is used (no ORM)
 No message queues or Docker, as per constraints
 
 ---------------------------------------------------
-Assessment Compliance
+6 Assessment Compliance
 
 MySQL used
 
